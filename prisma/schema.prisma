@@ -6,12 +6,11 @@
 
 generator client {
   provider = "prisma-client-js"
-  output   = "../generated/prisma"
 }
 
 datasource db {
   provider = "postgresql"
-  url      = env("DATABASE_URL")
+  url = env("DATABASE_URL")
 }
 
 enum BoardCategory {
@@ -22,17 +21,17 @@ enum BoardCategory {
 
 model Board {
   id Int @id @default(autoincrement())
-  title String 
+  title String
   author String?
   category BoardCategory //from select constraint
-  imageUrl String 
+  imageUrl String
   createdAt DateTime @default(now())
   cards Card[]
 }
 
 
 model Card {
-  id Int @id @defualt(autoincrement())
+  id Int @id @default(autoincrement())
   Message String
   Gif String
   Author String?
