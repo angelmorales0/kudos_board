@@ -13,3 +13,32 @@ datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
+
+enum BoardCategory {
+  CELEBRATION
+  THANK_YOU
+  INSPIRATION
+}
+
+model Board {
+  id Int @id @default(autoincrement())
+  title String 
+  author String?
+  category BoardCategory //from select constraint
+  imageUrl String 
+  createdAt DateTime @default(now())
+  cards Card[]
+}
+
+
+model Card {
+  id Int @id @defualt(autoincrement())
+  Message String
+  Gif String
+  Author String?
+  Upvotes Int @default(0)
+  board Board @relation(fields: [boardID], references: [id])
+  boardID Int
+
+
+}
