@@ -1,0 +1,105 @@
+.Board {
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08);
+  overflow: hidden;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  max-width: 300px;
+  margin: 16px;
+  display: flex;
+  flex-direction: column;
+}
+
+.Board:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.15), 0 3px 6px rgba(0, 0, 0, 0.1);
+}
+
+.Board img {
+  width: 100%;
+  height: 200px;
+  object-fit: contain;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.Board-header {
+  padding: 20px;
+  flex-grow: 1;
+}
+
+.Board-header h2 {
+  margin: 0 0 8px 0;
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #1f2937;
+  line-height: 1.4;
+}
+
+.Board-header h3 {
+  margin: 0;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: #6b7280;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.inputs {
+  padding: 16px 20px 20px 20px;
+  display: flex;
+  gap: 12px;
+  border-top: 1px solid #f3f4f6;
+}
+
+.inputs button {
+  flex: 1;
+  padding: 10px 16px;
+  border: none;
+  border-radius: 8px;
+  font-size: 0.875rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.inputs button:first-child {
+  background-color: #3b82f6;
+  color: white;
+}
+
+.inputs button:first-child:hover {
+  background-color: #2563eb;
+  transform: translateY(-1px);
+}
+
+.inputs button:last-child {
+  background-color: #f3f4f6;
+  color: #374151;
+  border: 1px solid #d1d5db;
+}
+
+.inputs button:last-child:hover {
+  background-color: #e5e7eb;
+  border-color: #9ca3af;
+  transform: translateY(-1px);
+}
+
+.inputs button:active {
+  transform: translateY(0);
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .Board {
+    max-width: 100%;
+    margin: 12px;
+  }
+
+  .inputs {
+    flex-direction: column;
+  }
+
+  .inputs button {
+    width: 100%;
+  }
+}
