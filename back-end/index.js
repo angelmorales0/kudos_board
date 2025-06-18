@@ -24,6 +24,7 @@ app.get("/", (req, res) => {
 //boards CRUD method
 
 //entire backend is p mcuh just app calls
+//React MAKES API CALLS USING Fetch
 
 app.get("/boards", (req, res) => {}); //retrieves boards
 app.post("/boards", (req, res) => {}); // creates boards
