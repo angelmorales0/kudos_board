@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './Card.css';
 
-const Card = (props) => {
+const Card = ({title,msg,gif,author,upvotes,id}) => {
     const [upvotes, setUpvotes] = useState(0);
     console.log(props)
     //EACH BOARD DISPLAYS img,title, categoirty, view board button delete board button
