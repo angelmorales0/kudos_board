@@ -9,7 +9,6 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 //Create and filter boards from within here
 const App = () => {
 
-
   return (
     <BrowserRouter>
     <Routes>
@@ -22,7 +21,6 @@ const App = () => {
           category ="recognition"
           id="1"
         />
-
         <Footer />
 
     </div>}> </Route>

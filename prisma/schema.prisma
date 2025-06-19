@@ -21,10 +21,10 @@ enum BoardCategory {
 
 model Board {
   id Int @id @default(autoincrement())
-  title String
+  title String @default("")
   author String?
   category BoardCategory //from select constraint
-  imageUrl String
+  imageUrl String @default("")
   createdAt DateTime @default(now())
   cards Card[]
 }
@@ -32,12 +32,12 @@ model Board {
 
 model Card {
   id Int @id @default(autoincrement())
-  Message String
-  Gif String
-  Author String?
-  Upvotes Int @default(0)
-  board Board @relation(fields: [boardID], references: [id])
-  boardID Int
+  message String
+  gif String
+  author String?
+  upvotes Int @default(0)
+  board Board @relation(fields: [boardid], references: [id])
+  boardid Int //foreign key
 
 
 }
