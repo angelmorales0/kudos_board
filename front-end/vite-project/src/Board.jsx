@@ -1,8 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import './Board.css';
+import { Link } from 'react-router-dom';
 
 const Board = (props) => {
     console.log(props)
+    const deleteBoard = async () => {
+        await fetch(`http://localhost:3000/boards/${props.id}/delete`, {
+            method: "DELETE",
+        })
+        props.fetchBoards()
+    };
+
     //EACH BOARD DISPLAYS img,title, categoirty, view board button delete board button
     return(
         <div className='Board'>
@@ -12,9 +20,11 @@ const Board = (props) => {
                 <h3>{props.category}</h3>
             </div>
             <div className="inputs">
-                <button>View Board</button>
-                <button>Delete Board</button>
-            </div>
+                <Link to ={`/boards/${props.id}` }>
+                    <button>View Board</button>
+                </Link>
+                <button className="delete-button" onClick={deleteBoard}>delete board</button>
+                </div>
         </div>
 
     )
