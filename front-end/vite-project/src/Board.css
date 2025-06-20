@@ -88,7 +88,6 @@
   transform: translateY(0);
 }
 
-/* Responsive design */
 @media (max-width: 768px) {
   .Board {
     max-width: 100%;

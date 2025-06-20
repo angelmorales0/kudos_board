@@ -21,10 +21,10 @@ const Board = (props) => {
             </div>
             <div className="inputs">
                 <Link to ={`/boards/${props.id}` }>
-                    <button>View Board</button>
+                    <button onClick={() => props.fetchCards(props.id)}>View Board</button>
                 </Link>
-                <button className="delete-button" onClick={deleteBoard}>delete board</button>
-                </div>
+                <button className="delete-button" onClick={deleteBoard}>Delete Board</button>
+            </div>
         </div>
 
     )

@@ -1,10 +1,21 @@
 import React, { useState, useEffect } from 'react';
 import './Card.css';
-//title,msg,gif,author,upvotes,id}
+//title,msg,gif,author,upvotes,boardid, cardID,}
 const Card = (props) => {
     console.log(props)
-    //EACH BOARD DISPLAYS img,title, categoirty, view board button delete board button
-    // ADD A CARDS PROPERTY?
+    const deleteCard = async () => {
+        await fetch(`http://localhost:3000/boards/${props.boardid}/cards/${props.cardid}/delete`, {
+            method: "DELETE",
+        })
+        props.fetchCards(props.boardid)
+    };
+    const upvoteCard = async () => {
+        await fetch(`http://localhost:3000/boards/${props.boardid}/cards/${props.cardid}/upvote`, {
+            method: "PATCH",
+        })
+        props.fetchCards(props.boardid)
+    };
+
     return(
         <div className='Card'>
             <div className='Card-header'>
@@ -12,10 +23,10 @@ const Card = (props) => {
             </div>
             <img src={props.gif} alt ="card-gif"/>
             <h2>{props.msg}</h2>
-            <h3>{props.author}</h3>
+            <h3> Card From {props.author}</h3>
             <div className="inputs">
-                <button>upvote:</button>
-                <button>Delete Card</button>
+                <button onClick={upvoteCard}>upvotes: {props.upvotes}</button>
+                <button onClick={deleteCard}>Delete Card</button>
             </div>
         </div>
 

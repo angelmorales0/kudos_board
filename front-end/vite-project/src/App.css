@@ -1,0 +1,199 @@
+/* App.css - Main application styles */
+
+.App {
+  min-height: 100vh;
+  background: #f5f5f5;
+  padding: 20px;
+}
+
+/* Filter section styling */
+.filter-section {
+  max-width: 1200px;
+  margin: 20px auto;
+  padding: 0 20px;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.filter-section label {
+  font-weight: 600;
+  color: #333;
+  font-size: 1.1rem;
+}
+
+.filter-dropdown {
+  padding: 0.75rem 1rem;
+  border: 2px solid #ddd;
+  border-radius: 8px;
+  background: white;
+  color: #333;
+  font-size: 1rem;
+  font-family: inherit;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  appearance: none;
+  background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23333' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6,9 12,15 18,9'%3e%3c/polyline%3e%3c/svg%3e");
+  background-repeat: no-repeat;
+  background-position: right 1rem center;
+  background-size: 1rem;
+  padding-right: 3rem;
+  min-width: 150px;
+}
+
+.filter-dropdown:focus {
+  outline: none;
+  border-color: #646cff;
+  box-shadow: 0 0 10px rgba(100, 108, 255, 0.2);
+}
+
+.filter-dropdown:hover {
+  border-color: #646cff;
+}
+
+/* Boards container styling */
+.boards {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px 0;
+}
+
+/* Cards container styling */
+.cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 20px;
+  max-width: 1200px;
+  margin: 20px auto;
+  padding: 20px 0;
+}
+
+/* Form styling for light backgrounds */
+.App .form-group {
+  margin-bottom: 1.5rem;
+}
+
+.App .form-group label {
+  display: block;
+  margin-bottom: 0.5rem;
+  color: #333;
+  font-weight: 600;
+  font-size: 1rem;
+}
+
+.App .form-group input,
+.App .form-group textarea,
+.App .form-group select {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  border: 2px solid #ddd;
+  border-radius: 8px;
+  background: white;
+  color: #333;
+  font-size: 1rem;
+  font-family: inherit;
+  transition: all 0.3s ease;
+  box-sizing: border-box;
+}
+
+.App .form-group input:focus,
+.App .form-group textarea:focus,
+.App .form-group select:focus {
+  outline: none;
+  border-color: #646cff;
+  box-shadow: 0 0 10px rgba(100, 108, 255, 0.2);
+  background: #fafafa;
+}
+
+.App .form-group input::placeholder,
+.App .form-group textarea::placeholder {
+  color: #888;
+  font-style: italic;
+}
+
+.App .form-group select {
+  cursor: pointer;
+  appearance: none;
+  background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23333' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6,9 12,15 18,9'%3e%3c/polyline%3e%3c/svg%3e");
+  background-repeat: no-repeat;
+  background-position: right 1rem center;
+  background-size: 1rem;
+  padding-right: 3rem;
+}
+
+.App .form-group select option {
+  background: white;
+  color: #333;
+  padding: 0.5rem;
+}
+
+/* Modal form styling */
+.App .modal-form {
+  max-width: 600px;
+  margin: 2rem auto;
+  padding: 2rem;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  border: 1px solid #e0e0e0;
+}
+
+.App .modal-form h2 {
+  margin: 0 0 1.5rem 0;
+  color: #333;
+  font-size: 1.5rem;
+  text-align: center;
+}
+
+/* Button styling */
+.App button {
+  background: linear-gradient(45deg, #646cff, #535bf2);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin: 0.5rem;
+}
+
+.App button:hover {
+  background: linear-gradient(45deg, #535bf2, #646cff);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(100, 108, 255, 0.3);
+}
+
+.App button:active {
+  transform: translateY(0);
+}
+
+/* No cards message styling */
+.App h1 {
+  text-align: center;
+  color: #666;
+  font-size: 1.5rem;
+  margin: 2rem 0;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .App {
+    padding: 10px;
+  }
+
+  .boards,
+  .cards {
+    grid-template-columns: 1fr;
+    padding: 10px 0;
+  }
+
+  .App .modal-form {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+}

@@ -10,17 +10,50 @@ app.use(express.json());
 //prisma.db.findmany is how you query
 //CRUD COMMANDS BELOW
 
-app.get("/boards", async (req, res) => {
-  const result = await prisma.board.findMany(); //retrieves boards
-  res.json(result);
-}); //retrieves boards
-
 //Board API calls
-
 
 app.get("/boards", async (req, res) => {
   const boards = await prisma.board.findMany(); //retrieves boards
-  res.json(baords);
+  res.json(boards);
+});
+
+app.get("/boards/celebration", async (req, res) => {
+  const boards = await prisma.board.findMany({
+    where: { category: "CELEBRATION" }
+  });
+  res.json(boards);
+});
+
+app.get("/boards/thankyou", async (req, res) => {
+  const boards = await prisma.board.findMany({
+    where: { category: "THANK_YOU" }
+  });
+  res.json(boards);
+});
+
+app.get("/boards/inspiration", async (req, res) => {
+  const boards = await prisma.board.findMany({
+    where: { category: "INSPIRATION" }
+  });
+  res.json(boards);
+});
+
+app.get("/boards/recent", async (req, res) => {
+  const boards = await prisma.board.findMany({
+    orderBy: {
+      createdAt: 'desc'
+    },
+    take: 6
+  });
+  res.json(boards);
+});
+
+app.get('/boards/search/:searchname', async (req, res) => {
+  const { searchname } = req.params;
+  const boards = await prisma.board.findMany({
+    where: { title: { contains: searchname, mode: 'insensitive' } }
+  });
+  res.json(boards);
 });
 
 app.post("/boards", async (req, res) => { // creates board
@@ -56,7 +89,8 @@ app.delete("/boards/:boardID/delete", async (req, res) => { //deletes board
 app.get("/boards/:boardID", async (req, res) => { //gets cards for a board
   const boardId = parseInt(req.params.boardID);
   const cards = await prisma.card.findMany({
-    where: {boardid: boardId}
+    where: {boardid: boardId},
+    orderBy: { id: 'asc' }
   });
   res.json(cards);
 });
@@ -84,7 +118,7 @@ app.patch("/boards/:boardID/cards/:cardID/upvote", async (req, res) => {
   const cardId = parseInt(req.params.cardID);
   const updatedCard = await prisma.card.update({ where: { id: cardId },
      data: {
-    votes: {increment: 1}
+    upvotes: {increment: 1}
 } });
   res.json(updatedCard);
 });

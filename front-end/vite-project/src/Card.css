@@ -100,7 +100,6 @@
   transform: translateY(0);
 }
 
-/* Responsive design */
 @media (max-width: 768px) {
   .Card {
     max-width: 100%;
