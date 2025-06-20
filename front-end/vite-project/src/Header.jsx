@@ -60,7 +60,7 @@ const Header = ({ createBoard, setSearch }) => {
           </div>
 
           <div className="header-center">
-            <form className="search-form">
+            <form className="search-form" onSubmit={search}>
               <div className="search-bar">
                 <input
                   type="text"
@@ -127,7 +127,9 @@ const Header = ({ createBoard, setSearch }) => {
                   onChange={updateFormData}
                   required
                 >
-                  <option value="" disabled>Select a category</option>
+                  <option value="" disabled>
+                    Select a category
+                  </option>
                   <option value="CELEBRATION">CELEBRATION</option>
                   <option value="THANK_YOU">THANK YOU</option>
                   <option value="INSPIRATION">INSPIRATION</option>
@@ -148,15 +150,14 @@ const Header = ({ createBoard, setSearch }) => {
               </div>
 
               <div className="form-group">
-                <label htmlFor="owner">Owner:</label>
+                <label htmlFor="owner">Owner (Optional):</label>
                 <input
                   type="text"
                   id="owner"
                   name="owner"
                   value={formData.owner}
                   onChange={updateFormData}
-                  placeholder="Enter your name"
-                  required
+                  placeholder="Enter your name (optional)"
                 />
               </div>
 

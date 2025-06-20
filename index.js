@@ -62,7 +62,7 @@ app.post("/boards", async (req, res) => { // creates board
       title: req.body.title,
       imageUrl: req.body.imageUrl,
       category: req.body.category,
-      author: req.body.author,
+      author: req.body.author || "Anonymous", 
     }
   });
   res.json(board);
