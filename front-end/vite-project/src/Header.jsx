@@ -1,35 +1,40 @@
-import React, { useState } from 'react';
-import './Header.css';
+import React, { useState } from "react";
+import "./Header.css";
 const Header = ({ createBoard, setSearch }) => {
-  const [searchBarContent, setsearchBarContent] = useState('');
+  const [searchBarContent, setsearchBarContent] = useState("");
   const [showModal, setShowModal] = useState(false);
   const [formData, setFormData] = useState({
-    title: '',
-    category: '',
-    imageUrl: '',
-    owner: ''
+    title: "",
+    category: "",
+    imageUrl: "",
+    owner: "",
   });
 
   const search = (e) => {
     e.preventDefault();
-    setSearch({searchContent: searchBarContent})
+    setSearch({ searchContent: searchBarContent });
   };
 
   const clearSearch = (e) => {
-    e.preventDefault(); 
-    setsearchBarContent('');
-    setSearch({searchContent: ''});
+    e.preventDefault();
+    setsearchBarContent("");
+    setSearch({ searchContent: "" });
   };
 
   const updateFormData = (e) => {
     const { name, value } = e.target;
-    setFormData({...formData, [name]: value});
+    setFormData({ ...formData, [name]: value });
   };
 
   const submitForm = (e) => {
     e.preventDefault();
     if (formData.title.trim() && formData.category.trim()) {
-      createBoard(formData.title, formData.imageUrl, formData.category, formData.owner);
+      createBoard(
+        formData.title,
+        formData.imageUrl,
+        formData.category,
+        formData.owner
+      );
       leaveModal();
     }
   };
@@ -38,10 +43,10 @@ const Header = ({ createBoard, setSearch }) => {
 
   const leaveModal = () => {
     setFormData({
-      title: '',
-      category: '',
-      imageUrl: '',
-      owner: ''
+      title: "",
+      category: "",
+      imageUrl: "",
+      owner: "",
     });
     setShowModal(false);
   };
@@ -50,24 +55,31 @@ const Header = ({ createBoard, setSearch }) => {
     <>
       <header className="header">
         <div className="header-top">
-
           <div className="logo">
-              <h1>🎉 Kudos Board</h1>
+            <h1>🎉 Kudos Board</h1>
           </div>
 
           <div className="header-center">
-            <form className="search-form" >
+            <form className="search-form">
               <div className="search-bar">
                 <input
                   type="text"
                   placeholder="Search"
                   value={searchBarContent}
-                  onChange={e=>setsearchBarContent(e.target.value)}
+                  onChange={(e) => setsearchBarContent(e.target.value)}
                 />
-                <button onClick={search} type="submit" className="search-button">
+                <button
+                  onClick={search}
+                  type="submit"
+                  className="search-button"
+                >
                   🔍
                 </button>
-                <button onClick={clearSearch} type="button" className="clear-button">
+                <button
+                  onClick={clearSearch}
+                  type="button"
+                  className="clear-button"
+                >
                   clear
                 </button>
               </div>
@@ -75,11 +87,13 @@ const Header = ({ createBoard, setSearch }) => {
           </div>
 
           <div className="header-right">
-            <button className="create-board-btn" onClick={() => setShowModal(true)} >
-            Create Board
+            <button
+              className="create-board-btn"
+              onClick={() => setShowModal(true)}
+            >
+              Create Board
             </button>
           </div>
-
         </div>
       </header>
 
@@ -113,9 +127,9 @@ const Header = ({ createBoard, setSearch }) => {
                   onChange={updateFormData}
                   required
                 >
-                  <option value="">Select a category</option>
+                  <option value="" disabled>Select a category</option>
                   <option value="CELEBRATION">CELEBRATION</option>
-                  <option value="THANK_YOU">THANK_YOU</option>
+                  <option value="THANK_YOU">THANK YOU</option>
                   <option value="INSPIRATION">INSPIRATION</option>
                 </select>
               </div>
@@ -147,7 +161,11 @@ const Header = ({ createBoard, setSearch }) => {
               </div>
 
               <div className="modal-actions">
-                <button type="button" className="cancel-btn" onClick={leaveModal}>
+                <button
+                  type="button"
+                  className="cancel-btn"
+                  onClick={leaveModal}
+                >
                   Cancel
                 </button>
                 <button

@@ -4,14 +4,13 @@ import Header from "./Header";
 import Board from "./Board";
 import Card from "./Card";
 import "./App.css";
-import { BrowserRouter, Route, Routes, useParams } from "react-router-dom";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 
-//ROUTER POINT IS TO HANDLE NAVIGATION AND ROUTING OF THE APP
-//Create and filter boards from within here
 const App = () => {
-  const api_key = import.meta.env.VITE_GIPHY_API_KEY;
+  const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
+  const API_KEY = import.meta.env.VITE_GIPHY_API_KEY;
   const [boards, setBoards] = useState([]);
   const [cards, setCards] = useState([]);
   const [searchBarContent, setsearchBarContent] = useState("");
@@ -36,16 +35,17 @@ const App = () => {
   const findGif = async () => {
     const searchTerm = newCardData.gif;
     const response = await fetch(
-      `https://api.giphy.com/v1/gifs/search?api_key=${api_key}&q=${searchTerm}&limit=3&rating=g`
+      `https://api.giphy.com/v1/gifs/search?api_key=${API_KEY}&q=${searchTerm}&limit=3&rating=g`
     );
     const gif_data = await response.json();
+    console.log("gif_data:", gif_data);
     setGifs(gif_data.data);
   };
 
   const fetchCards = async (id) => {
-    const response = await fetch(`http://localhost:3000/boards/${id}`);
-    const card_data = await response.json();
-    setCards(card_data);
+    const response = await fetch(`${BACKEND_URL}/boards/${id}`);
+    const cardData = await response.json();
+    setCards(cardData);
     setCurrentBoardId(id);
   };
 
@@ -57,34 +57,35 @@ const App = () => {
   const fetchBoards = async () => {
     let response;
 
-    if (searchBarContent != "") {
+    if (searchBarContent !== "") {
       response = await fetch(
-        `http://localhost:3000/boards/search/${searchBarContent}`
+        `${BACKEND_URL}/boards/search/${searchBarContent}`
       );
     } else {
       switch (filterOption) {
         case "All":
-          response = await fetch("http://localhost:3000/boards");
+          response = await fetch(`${BACKEND_URL}/boards`);
+          console.log("response:", response);
           break;
         case "Recent":
-          response = await fetch("http://localhost:3000/boards/recent");
+          response = await fetch(`${BACKEND_URL}/boards/recent`);
           break;
 
         case "Celebration":
-          response = await fetch("http://localhost:3000/boards/celebration");
+          response = await fetch(`${BACKEND_URL}/boards/celebration`);
           break;
 
         case "Thank You":
-          response = await fetch("http://localhost:3000/boards/thankyou");
+          response = await fetch(`${BACKEND_URL}/boards/thankyou`);
           break;
 
         case "Inspiration":
-          response = await fetch("http://localhost:3000/boards/inspiration");
+          response = await fetch(`${BACKEND_URL}/boards/inspiration`);
           break;
       }
     }
-    const board_data = await response.json();
-    setBoards(board_data);
+    const boardData = await response.json();
+    setBoards(boardData);
   };
 
   const createBoard = async (title, imageUrl, category, author) => {
@@ -95,7 +96,7 @@ const App = () => {
       author: author,
     });
 
-    await fetch(`http://localhost:3000/boards`, {
+    await fetch(`${BACKEND_URL}/boards`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -112,7 +113,7 @@ const App = () => {
       author: author,
       boardid: boardID,
     });
-    await fetch(`http://localhost:3000/boards/${boardID}`, {
+    await fetch(`${BACKEND_URL}/boards/${boardID}`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -133,7 +134,6 @@ const App = () => {
         <Route
           path="/"
           element={
-            //THE ROUTE FOR THE HOME PAGE
             <div className="App">
               <Header createBoard={createBoard} setSearch={setSearch} />
               <div className="filter-section">
@@ -161,7 +161,7 @@ const App = () => {
                     id={board.id}
                     fetchBoards={fetchBoards}
                     fetchCards={fetchCards}
-                  ></Board>
+                  />
                 ))}
               </div>
 
@@ -175,7 +175,7 @@ const App = () => {
           path="/boards/:boardid"
           element={
             <div className="App">
-              <form className="modal-form" >
+              <form className="modal-form">
                 <div className="form-group">
                   <label htmlFor="message">message:</label>
                   <input
@@ -217,13 +217,13 @@ const App = () => {
                   </button>
                   <div>
                     {gifs.length === 0 ? (
-                      <h1>Search for a gif</h1>
+                      <p>Search for a gif</p>
                     ) : (
                       gifs.map((gif) => (
                         <img
                           key={gif.id}
                           src={gif.images.fixed_height.url}
-                          alt={gif.title}
+                          alt={gif.alt_text}
                           onClick={() =>
                             setNewCardData({
                               ...newCardData,
@@ -233,7 +233,7 @@ const App = () => {
                         />
                       ))
                     )}{" "}
-                    <h3> Click one to copy url into bar</h3>
+                    <p> Click one to copy url into bar</p>
                   </div>
                 </div>
               </form>

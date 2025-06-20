@@ -2,7 +2,7 @@ import cors from "cors";
 import express from "express";
 const app = express(); // Sets up the
 const PORT = process.env.PORT || 3000;
-import { PrismaClient } from "@prisma/client";
+import { BoardCategory, PrismaClient } from "@prisma/client";
 const prisma = new PrismaClient();
 app.use(cors());
 app.use(express.json());
@@ -19,21 +19,21 @@ app.get("/boards", async (req, res) => {
 
 app.get("/boards/celebration", async (req, res) => {
   const boards = await prisma.board.findMany({
-    where: { category: "CELEBRATION" }
+    where: { category: BoardCategory.CELEBRATION}
   });
   res.json(boards);
 });
 
 app.get("/boards/thankyou", async (req, res) => {
   const boards = await prisma.board.findMany({
-    where: { category: "THANK_YOU" }
+    where: { category:  BoardCategory.THANK_YOU}
   });
   res.json(boards);
 });
 
 app.get("/boards/inspiration", async (req, res) => {
   const boards = await prisma.board.findMany({
-    where: { category: "INSPIRATION" }
+    where: { category: BoardCategory.INSPIRATION }
   });
   res.json(boards);
 });
@@ -118,8 +118,9 @@ app.patch("/boards/:boardID/cards/:cardID/upvote", async (req, res) => {
   const cardId = parseInt(req.params.cardID);
   const updatedCard = await prisma.card.update({ where: { id: cardId },
      data: {
-    upvotes: {increment: 1}
-} });
+      upvotes: {increment: 1}
+    }
+  });
   res.json(updatedCard);
 });
 
